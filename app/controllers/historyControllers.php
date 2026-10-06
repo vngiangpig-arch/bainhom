@@ -1,27 +1,31 @@
 <?php
-require_once "models.php";
+class HistoryController {
+    private $historyModel;
 
-$page = $_GET['page'] ?? 'dashboard';
-$action = $_POST['action'] ?? '';
-if ($page === 'historybank') {
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $action === 'delete') {
-        deleteHistoryBank($_POST['id']);
-        header('Location: index.php?page=historybank'); exit();
+    public function __construct($model) {
+        $this->historyModel = $model;
     }
-    $historybanks = getHistoryBanks();
-    require_once "Views/historybank.php";
-}
-elseif ($page === 'historyplan') {
-    if ($_SERVER['REQUEST_METHOD'] === "POST" && $action === 'delete') {
-        deleteHistoryPlan($_POST['id']);
-        header('Location: index.php?page=historyplan'); exit();
+
+    public function handleBankRequest() {
+        $action = $_POST['action'] ?? '';
+        if ($_SERVER['REQUEST_METHOD'] === "POST" && $action === 'delete') {
+            $this->historyModel->deleteHistoryBank($_POST['id']);
+            header('Location: index.php?page=historybank'); 
+            exit();
+        }
+        $historybanks = $this->historyModel->getHistoryBanks();
+        require_once __DIR__ . "/../view/historybank/historybank.php";
     }
-    $historyplans = getHistoryPlans();
-    require_once "Views/historyplan.php";
-}
-else {
-    require_once "Views/dashboard.php";
-}
 
-
+    public function handlePlanRequest() {
+        $action = $_POST['action'] ?? '';
+        if ($_SERVER['REQUEST_METHOD'] === "POST" && $action === 'delete') {
+            $this->historyModel->deleteHistoryPlan($_POST['id']);
+            header('Location: index.php?page=historyplan'); 
+            exit();
+        }
+        $historyplans = $this->historyModel->getHistoryPlans();
+        require_once __DIR__ . "/../view/historybank/historyplan.php";
+    }
+}
 ?>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head><meta charset="UTF-8"><title>Quản lý Ngân hàng</title><link rel="stylesheet" href="style.css"></head>
+<head><meta charset="UTF-8"><title>Quản lý Ngân hàng</title><link rel="stylesheet" href="../../style.css"></head>
 <body>
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -31,7 +31,7 @@
     <div id="modalAdd" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Thêm Ngân Hàng</h3><span class="close" onclick="closeModal('modalAdd')">&times;</span></div>
-            <form method="POST" action="index.php?page=bank">
+            <form method="POST" action="../controllers/bankControllers.php">
                 <input type="hidden" name="action" value="add">
                 <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" required></div>
                 <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" required></div>
@@ -44,7 +44,7 @@
     <div id="modalEdit" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Sửa Ngân Hàng</h3><span class="close" onclick="closeModal('modalEdit')">&times;</span></div>
-            <form method="POST" action="index.php?page=bank">
+            <form method="POST" action="../controllers/bankControllers.php">
                 <input type="hidden" name="action" value="edit"><input type="hidden" name="id" id="edit_id">
                 <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" id="edit_tenbank" required></div>
                 <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" id="edit_chutaikhoan" required></div>
@@ -57,7 +57,7 @@
     <div id="modalDelete" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Xác nhận xóa</h3><span class="close" onclick="closeModal('modalDelete')">&times;</span></div>
-            <form method="POST" action="index.php?page=bank">
+            <form method="POST" action="../controllers/bankControllers.php">
                 <input type="hidden" name="action" value="delete"><input type="hidden" name="id" id="delete_id">
                 <p>Bạn có chắc muốn xóa ngân hàng này?</p>
                 <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalDelete')">Hủy</button><button type="submit" class="btn btn-delete">Xác nhận Xóa</button></div>

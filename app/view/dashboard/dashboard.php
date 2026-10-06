@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Admin</title>
-    <link rel="stylesheet" href="../../../style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
 <body class="dashboard-body">
 
@@ -12,13 +12,13 @@
             <h3>⚙️ Admin</h3>
         </div>
         <ul class="sidebar-menu">
-            <li><a data-target="home" class="menu-link active">🏠 Trang Chủ</a></li>
-            <li><a href="index.php?page=user" target="content-frame" class="menu-link">👥 Quản lý User</a></li>
-            <li><a href="index.php?page=plan" target="content-frame" class="menu-link">💎 Quản lý Gói</a></li>
-            <li><a href="index.php?page=bank" target="content-frame" class="menu-link">🏦 Quản lý Ngân hàng</a></li>
-            <li><a href="index.php?page=historybank" target="content-frame" class="menu-link">💵 Lịch sử Nạp tiền</a></li>
-            <li><a href="index.php?page=historyplan" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
-        </ul>
+    <li><a data-target="home" class="menu-link active">🏠 Trang Chủ</a></li>
+    <li><a href="index.php?page=user" target="content-frame" class="menu-link">👥 Quản lý User</a></li>
+    <li><a href="index.php?page=plan" target="content-frame" class="menu-link">💎 Quản lý Gói</a></li>
+    <li><a href="index.php?page=bank" target="content-frame" class="menu-link">🏦 Quản lý Ngân hàng</a></li>
+    <li><a href="index.php?page=historybank" target="content-frame" class="menu-link">💵 Lịch sử Nạp tiền</a></li>
+    <li><a href="index.php?page=historyplan" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
+</ul>
     </div>
 
     <div class="main-content">

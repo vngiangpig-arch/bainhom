@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8"><title>Quản lý User</title><link rel="stylesheet" href="../../../style.css">
+    <meta charset="UTF-8"><title>Quản lý User</title><link rel="stylesheet" href="style.css">
     <style>
         .btn-ban { background-color: #fd7e14; color: #fff; }
         .btn-unban { background-color: #20c997; color: #fff; }
@@ -44,7 +44,7 @@
     <div id="modalAdd" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Thêm User</h3><span class="close" onclick="closeModal('modalAdd')">&times;</span></div>
-            <form method="POST" action="../controllers/userControllers.php">
+            <form method="POST" action="index.php?page=user">
                 <input type="hidden" name="action" value="add">
                 <div class="form-group"><label>Tên hiển thị</label><input type="text" name="username" required></div>
                 <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
@@ -65,7 +65,7 @@
     <div id="modalEdit" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Sửa User</h3><span class="close" onclick="closeModal('modalEdit')">&times;</span></div>
-            <form method="POST" action="../controllers/userControllers.php">
+            <form method="POST" action="index.php?page=user">
                 <input type="hidden" name="action" value="edit"><input type="hidden" name="id" id="edit_id">
                 <div class="form-group"><label>Tên hiển thị</label><input type="text" name="username" id="edit_user" required></div>
                 <div class="form-group"><label>Email</label><input type="email" name="email" id="edit_email" required></div>
@@ -85,7 +85,7 @@
     <div id="modalBan" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Xác nhận Trạng Thái</h3><span class="close" onclick="closeModal('modalBan')">&times;</span></div>
-            <form method="POST" action="../controllers/userControllers.php">
+            <form method="POST" action="index.php?page=user">
                 <input type="hidden" name="action" value="ban"><input type="hidden" name="id" id="ban_id"><input type="hidden" name="current_status" id="ban_status">
                 <p id="ban_text" style="font-size: 15px; margin-bottom: 20px;">Bạn có chắc chắn muốn thay đổi trạng thái tài khoản này?</p>
                 <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalBan')">Hủy</button><button type="submit" class="btn btn-ban" id="btn_submit_ban">Xác nhận</button></div>
@@ -96,7 +96,7 @@
     <div id="modalReset" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Xác nhận Reset Thiết Bị</h3><span class="close" onclick="closeModal('modalReset')">&times;</span></div>
-            <form method="POST" action="../controllers/userControllers.php">
+            <form method="POST" action="index.php?page=user">
                 <input type="hidden" name="action" value="reset_device"><input type="hidden" name="id" id="reset_id">
                 <p style="font-size: 15px; margin-bottom: 20px;">Bạn có chắc chắn muốn <strong>xóa toàn bộ thiết bị đã đăng nhập</strong> của tài khoản này không?</p>
                 <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalReset')">Hủy</button><button type="submit" class="btn btn-reset">Tiến hành Reset</button></div>
@@ -107,7 +107,7 @@
     <div id="modalDelete" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h3>Xác nhận xóa</h3><span class="close" onclick="closeModal('modalDelete')">&times;</span></div>
-            <form method="POST" action="../controllers/userControllers.php">
+            <form method="POST" action="index.php?page=user">
                 <input type="hidden" name="action" value="delete"><input type="hidden" name="id" id="delete_id">
                 <p style="font-size: 15px; color: #dc3545; margin-bottom: 20px;">Bạn có chắc muốn xóa User này vĩnh viễn? Dữ liệu không thể khôi phục.</p>
                 <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalDelete')">Hủy</button><button type="submit" class="btn btn-delete">Xác nhận Xóa</button></div>

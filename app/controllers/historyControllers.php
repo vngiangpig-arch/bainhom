@@ -14,7 +14,7 @@ class HistoryController {
             exit();
         }
         $historybanks = $this->historyModel->getHistoryBanks();
-        require_once __DIR__ . "/../view/historybank/historybank.php";
+        require_once __DIR__ . "/../view/history/historybank.php";
     }
 
     public function handlePlanRequest() {
@@ -25,7 +25,7 @@ class HistoryController {
             exit();
         }
         $historyplans = $this->historyModel->getHistoryPlans();
-        require_once __DIR__ . "/../view/historybank/historyplan.php";
+        require_once __DIR__ . "/../view/history/historyplan.php";
     }
 }
 ?>

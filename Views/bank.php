@@ -1,60 +1,6 @@
-<?php
-require_once "database.php";
-
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    
-    $action =$_POST['action'] ?? '';
-
-    if ($action === 'add') {
-        $tenbank =$_POST['tenbank'] ?? '';
-        $chutaikhoan =$_POST['chutaikhoan'] ?? '';
-        $sotaikhoan =$_POST['sotaikhoan'] ?? '';
-
-        $sql = "INSERT INTO bank (tenbank, chutaikhoan, sotaikhoan) VALUES (?, ?, ?)";
-        
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$tenbank, $chutaikhoan,$sotaikhoan]);
-
-        header('Location: bank.php'); 
-        exit();
-    }
-    
-    elseif ($action === 'edit') {
-        $tenbank =$_POST['tenbank'] ?? '';
-        $chutaikhoan =$_POST['chutaikhoan'] ?? '';
-        $sotaikhoan =$_POST['sotaikhoan'] ?? '';
-        $id =$_POST['id'] ?? '';
-
-        $sql = "UPDATE bank SET tenbank = ?, chutaikhoan = ?, sotaikhoan = ? WHERE id = ?";
-        
-        $stmt =$pdo->prepare($sql);$stmt->execute([$tenbank,$chutaikhoan, $sotaikhoan,$id]);
-
-        header('Location: bank.php'); 
-        exit();
-    } 
-    
-    elseif ($action === 'delete') {
-        $id =$_POST['id'] ?? '';
-
-        $sql = "DELETE FROM bank WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$id]);
-
-        header('Location: bank.php'); 
-        exit();
-    }
-}
-
-$sql_select = "SELECT * FROM bank ORDER BY id DESC";
-$banks = $pdo->query($sql_select)->fetchAll(PDO::FETCH_ASSOC);
-?>
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Quản lý Ngân hàng</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+<head><meta charset="UTF-8"><title>Quản lý Ngân hàng</title><link rel="stylesheet" href="style.css"></head>
 <body>
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -62,9 +8,7 @@ $banks = $pdo->query($sql_select)->fetchAll(PDO::FETCH_ASSOC);
             <button class="btn btn-save" onclick="openAddModal()">+ Thêm Ngân Hàng</button>
         </div>
         <table>
-            <thead>
-                <tr><th>#</th><th>Tên Ngân Hàng</th><th>Chủ Tài Khoản</th><th>Số Tài Khoản</th><th>Thao tác</th></tr>
-            </thead>
+            <thead><tr><th>#</th><th>Tên Ngân Hàng</th><th>Chủ Tài Khoản</th><th>Số Tài Khoản</th><th>Thao tác</th></tr></thead>
             <tbody>
                 <?php foreach ($banks as $index => $row): ?>
                 <tr>
@@ -74,9 +18,7 @@ $banks = $pdo->query($sql_select)->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($row['sotaikhoan']) ?></td>
                     <td>
                         <div class="action-btns">
-                            <button class="btn btn-edit" onclick="openEditModal(this)" 
-                                data-id="<?= $row['id'] ?>" data-ten="<?= $row['tenbank'] ?>" 
-                                data-chu="<?= $row['chutaikhoan'] ?>" data-so="<?= $row['sotaikhoan'] ?>">Sửa</button>
+                            <button class="btn btn-edit" onclick="openEditModal(this)" data-id="<?= $row['id'] ?>" data-ten="<?= $row['tenbank'] ?>" data-chu="<?= $row['chutaikhoan'] ?>" data-so="<?= $row['sotaikhoan'] ?>">Sửa</button>
                             <button class="btn btn-delete" onclick="openDeleteModal(<?= $row['id'] ?>)">Xóa</button>
                         </div>
                     </td>
@@ -88,57 +30,37 @@ $banks = $pdo->query($sql_select)->fetchAll(PDO::FETCH_ASSOC);
 
     <div id="modalAdd" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3>Thêm Ngân Hàng</h3>
-                <span class="close" onclick="closeModal('modalAdd')">&times;</span>
-            </div>
-            <form method="POST">
+            <div class="modal-header"><h3>Thêm Ngân Hàng</h3><span class="close" onclick="closeModal('modalAdd')">&times;</span></div>
+            <form method="POST" action="index.php?page=bank">
                 <input type="hidden" name="action" value="add">
                 <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" required></div>
                 <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" required></div>
                 <div class="form-group"><label>Số Tài Khoản</label><input type="text" name="sotaikhoan" required></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('modalAdd')">Hủy</button>
-                    <button type="submit" class="btn btn-save">Thêm mới</button>
-                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalAdd')">Hủy</button><button type="submit" class="btn btn-save">Thêm mới</button></div>
             </form>
         </div>
     </div>
 
     <div id="modalEdit" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3>Sửa Ngân Hàng</h3>
-                <span class="close" onclick="closeModal('modalEdit')">&times;</span>
-            </div>
-            <form method="POST">
-                <input type="hidden" name="action" value="edit">
-                <input type="hidden" name="id" id="edit_id">
+            <div class="modal-header"><h3>Sửa Ngân Hàng</h3><span class="close" onclick="closeModal('modalEdit')">&times;</span></div>
+            <form method="POST" action="index.php?page=bank">
+                <input type="hidden" name="action" value="edit"><input type="hidden" name="id" id="edit_id">
                 <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" id="edit_tenbank" required></div>
                 <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" id="edit_chutaikhoan" required></div>
                 <div class="form-group"><label>Số Tài Khoản</label><input type="text" name="sotaikhoan" id="edit_sotaikhoan" required></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('modalEdit')">Hủy</button>
-                    <button type="submit" class="btn btn-save">Lưu thay đổi</button>
-                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalEdit')">Hủy</button><button type="submit" class="btn btn-save">Lưu thay đổi</button></div>
             </form>
         </div>
     </div>
 
     <div id="modalDelete" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3>Xác nhận xóa</h3>
-                <span class="close" onclick="closeModal('modalDelete')">&times;</span>
-            </div>
-            <form method="POST">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="id" id="delete_id">
+            <div class="modal-header"><h3>Xác nhận xóa</h3><span class="close" onclick="closeModal('modalDelete')">&times;</span></div>
+            <form method="POST" action="index.php?page=bank">
+                <input type="hidden" name="action" value="delete"><input type="hidden" name="id" id="delete_id">
                 <p>Bạn có chắc muốn xóa ngân hàng này?</p>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancel" onclick="closeModal('modalDelete')">Hủy</button>
-                    <button type="submit" class="btn btn-delete">Xác nhận Xóa</button>
-                </div>
+                <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalDelete')">Hủy</button><button type="submit" class="btn btn-delete">Xác nhận Xóa</button></div>
             </form>
         </div>
     </div>

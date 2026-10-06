@@ -13,11 +13,11 @@
         </div>
         <ul class="sidebar-menu">
             <li><a data-target="home" class="menu-link active">🏠 Trang Chủ</a></li>
-            <li><a href="user.php" target="content-frame" class="menu-link">👥 Quản lý User</a></li>
-            <li><a href="plan.php" target="content-frame" class="menu-link">💎 Quản lý Gói</a></li>
-            <li><a href="bank.php" target="content-frame" class="menu-link">🏦 Quản lý Ngân hàng</a></li>
-            <li><a href="historybank.php" target="content-frame" class="menu-link">💵 Lịch sử Nạp tiền</a></li>
-            <li><a href="historyplan.php" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
+            <li><a href="index.php?page=user" target="content-frame" class="menu-link">👥 Quản lý User</a></li>
+            <li><a href="index.php?page=plan" target="content-frame" class="menu-link">💎 Quản lý Gói</a></li>
+            <li><a href="index.php?page=bank" target="content-frame" class="menu-link">🏦 Quản lý Ngân hàng</a></li>
+            <li><a href="index.php?page=historybank" target="content-frame" class="menu-link">💵 Lịch sử Nạp tiền</a></li>
+            <li><a href="index.php?page=historyplan" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
         </ul>
     </div>
 

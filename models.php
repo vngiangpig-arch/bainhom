@@ -49,3 +49,39 @@ function resetUserDevice($id) {
     global $pdo;
     return $pdo->prepare("UPDATE user SET device = NULL WHERE id = ?")->execute([$id]);
 }
+function getPlans() {
+    global $pdo;
+    return $pdo->query("SELECT * FROM plan ORDER BY id DESC")->fetchAll(PDO::FETCH_ASSOC);
+}
+function addPlan($name, $price, $device, $time, $description) {
+    global $pdo;
+    $sql = "INSERT INTO plan (name, price, device, time, description) VALUES (:name, :price, :device, :time, :description)";
+    return $pdo->prepare($sql)->execute(['name'=>$name, 'price'=>$price, 'device'=>$device, 'time'=>$time, 'description'=>$description]);
+}
+function updatePlan($id, $name, $price, $device, $time, $description) {
+    global $pdo;
+    $sql = "UPDATE plan SET name = :name, price = :price, device = :device, time = :time, description = :description WHERE id = :id";
+    return $pdo->prepare($sql)->execute(['name'=>$name, 'price'=>$price, 'device'=>$device, 'time'=>$time, 'description'=>$description, 'id'=>$id]);
+}
+function deletePlan($id) {
+    global $pdo;
+    return $pdo->prepare("DELETE FROM plan WHERE id = :id")->execute(['id' => $id]);
+}
+function getHistoryBanks() {
+    global $pdo;
+    $sql = "SELECT h.*, u.username FROM historybank h LEFT JOIN user u ON h.user_id = u.id ORDER BY h.id DESC";
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+function deleteHistoryBank($id) {
+    global $pdo;
+    return $pdo->prepare("DELETE FROM historybank WHERE id = :id")->execute(['id' => $id]);
+}
+function getHistoryPlans() {
+    global $pdo;
+    $sql = "SELECT hp.*, u.email, p.name AS plan_name FROM historyplan hp LEFT JOIN user u ON hp.user_id = u.id LEFT JOIN plan p ON hp.plan_id = p.id ORDER BY hp.id DESC";
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+}
+function deleteHistoryPlan($id) {
+    global $pdo;
+    return $pdo->prepare("DELETE FROM historyplan WHERE id = :id")->execute(['id' => $id]);
+}

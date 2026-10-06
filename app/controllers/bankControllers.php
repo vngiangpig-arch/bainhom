@@ -1,22 +1,24 @@
 <?php
-require_once __DIR__ . "/../models/bankModels.php";
+class BankController {
+    private $bankModel;
 
-$page = $_GET['page'] ?? 'dashboard';
-$action = $_POST['action'] ?? '';
-
-if ($page === 'bank') {
-    if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        if ($action === 'add') addBank($_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
-        elseif ($action === 'edit') updateBank($_POST['id'], $_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
-        elseif ($action === 'delete') deleteBank($_POST['id']);
-        header('Location: index.php?page=bank'); exit();
+    public function __construct($model) {
+        $this->bankModel = $model;
     }
-    $banks = getBanks();
-    require_once __DIR__ . "/../view/bank.php";
-}
-else {
-    require_once __DIR__ . "/../view/dashboard/dashboard.php";
-}
 
+    public function handleRequest() {
+        $action = $_POST['action'] ?? '';
 
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            if ($action === 'add') $this->bankModel->addBank($_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
+            elseif ($action === 'edit') $this->bankModel->updateBank($_POST['id'], $_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
+            elseif ($action === 'delete') $this->bankModel->deleteBank($_POST['id']);
+            header('Location: index.php?page=bank'); 
+            exit();
+        }
+
+        $banks = $this->bankModel->getBanks();
+        require_once __DIR__ . "/../view/bank/bank.php";
+    }
+}
 ?>

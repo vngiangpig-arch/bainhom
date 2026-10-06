@@ -1,27 +1,32 @@
 <?php
-require_once __DIR__ . "/../models/userModels.php";
+class UserController {
+    private $userModel;
+    private $planModel;
 
-$page = $_GET['page'] ?? 'dashboard';
-$action = $_POST['action'] ?? '';
-
-if ($page === 'user') {
-    if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        $id = $_POST['id'] ?? '';
-        $plan_id = !empty($_POST['plan_id']) ? $_POST['plan_id'] : null;
-        if ($action === 'add') addUser($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role'], $_POST['price'], $_POST['status'], $plan_id);
-        elseif ($action === 'edit') updateUser($id, $_POST['username'], $_POST['email'], $_POST['role'], $_POST['price'], $_POST['status'], $plan_id);
-        elseif ($action === 'delete') deleteUser($id);
-        elseif ($action === 'ban') banUser($id, $_POST['current_status']);
-        elseif ($action === 'reset_device') resetUserDevice($id);
-        header('Location: index.php?page=user'); exit();
+    public function __construct($userModel, $planModel) {
+        $this->userModel = $userModel;
+        $this->planModel = $planModel;
     }
-    $users = getUsers();
-    $plans = getPlans();
-    require_once "Views/user.php";
-}
-else {
-    require_once __DIR__ . "/../view/dashboard/dashboard.php";
-}
 
+    public function handleRequest() {
+        $action = $_POST['action'] ?? '';
 
+        if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            $id = $_POST['id'] ?? '';
+            $plan_id = !empty($_POST['plan_id']) ? $_POST['plan_id'] : null;
+
+            if ($action === 'add') $this->userModel->addUser($_POST['username'], $_POST['email'], $_POST['password'], $_POST['role'], $_POST['price'], $_POST['status'], $plan_id);
+            elseif ($action === 'edit') $this->userModel->updateUser($id, $_POST['username'], $_POST['email'], $_POST['role'], $_POST['price'], $_POST['status'], $plan_id);
+            elseif ($action === 'delete') $this->userModel->deleteUser($id);
+            elseif ($action === 'ban') $this->userModel->banUser($id, $_POST['current_status']);
+            elseif ($action === 'reset_device') $this->userModel->resetUserDevice($id);
+            header('Location: index.php?page=user'); 
+            exit();
+        }
+
+        $users = $this->userModel->getUsers();
+        $plans = $this->planModel->getPlans();
+        require_once __DIR__ . "/../view/user/user.php";
+    }
+}
 ?>

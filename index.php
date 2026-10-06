@@ -29,7 +29,36 @@ elseif ($page === 'user') {
     $plans = getPlans();
     require_once "Views/user.php";
 }
+elseif ($page === 'plan') {
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        if ($action === 'add') addPlan($_POST['name'], $_POST['price'], $_POST['device'], $_POST['time'], $_POST['description']);
+        elseif ($action === 'edit') updatePlan($_POST['id'], $_POST['name'], $_POST['price'], $_POST['device'], $_POST['time'], $_POST['description']);
+        elseif ($action === 'delete') deletePlan($_POST['id']);
+        header('Location: index.php?page=plan'); exit();
+    }
+    $plans = getPlans();
+    require_once "Views/plan.php";
+}
+elseif ($page === 'historybank') {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $action === 'delete') {
+        deleteHistoryBank($_POST['id']);
+        header('Location: index.php?page=historybank'); exit();
+    }
+    $historybanks = getHistoryBanks();
+    require_once "Views/historybank.php";
+}
+elseif ($page === 'historyplan') {
+    if ($_SERVER['REQUEST_METHOD'] === "POST" && $action === 'delete') {
+        deleteHistoryPlan($_POST['id']);
+        header('Location: index.php?page=historyplan'); exit();
+    }
+    $historyplans = getHistoryPlans();
+    require_once "Views/historyplan.php";
+}
 else {
     require_once "Views/dashboard.php";
 }
+
+
 ?>
+

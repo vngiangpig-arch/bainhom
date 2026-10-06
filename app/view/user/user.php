@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8"><title>Quản lý User</title><link rel="stylesheet" href="../../style.css">
+    <meta charset="UTF-8"><title>Quản lý User</title><link rel="stylesheet" href="../../../style.css">
     <style>
         .btn-ban { background-color: #fd7e14; color: #fff; }
         .btn-unban { background-color: #20c997; color: #fff; }

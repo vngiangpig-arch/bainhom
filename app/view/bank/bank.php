@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head><meta charset="UTF-8"><title>Quản lý Ngân hàng</title><link rel="stylesheet" href="../../style.css"></head>
+<head><meta charset="UTF-8"><title>Quản lý Ngân hàng</title><link rel="stylesheet" href="../../../style.css"></head>
 <body>
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center;">

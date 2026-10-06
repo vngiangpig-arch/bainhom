@@ -1,5 +1,5 @@
 <?php
-require_once "database.php";
+require_once __DIR__ . "/../../database/database.php";
 function getUsers() {
     global $pdo;
     $sql = "SELECT u.*, p.name as plan_name FROM user u LEFT JOIN plan p ON u.plan_id = p.id ORDER BY u.id DESC";

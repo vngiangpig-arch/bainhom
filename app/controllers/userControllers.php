@@ -1,5 +1,5 @@
 <?php
-require_once "models.php";
+require_once __DIR__ . "/../models/userModels.php";
 
 $page = $_GET['page'] ?? 'dashboard';
 $action = $_POST['action'] ?? '';
@@ -20,7 +20,7 @@ if ($page === 'user') {
     require_once "Views/user.php";
 }
 else {
-    require_once "Views/dashboard.php";
+    require_once __DIR__ . "/../view/dashboard/dashboard.php";
 }
 
 

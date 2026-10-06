@@ -1,5 +1,5 @@
 <?php
-require_once "models.php";
+require_once __DIR__ . "/../models/bankModels.php";
 
 $page = $_GET['page'] ?? 'dashboard';
 $action = $_POST['action'] ?? '';
@@ -12,10 +12,10 @@ if ($page === 'bank') {
         header('Location: index.php?page=bank'); exit();
     }
     $banks = getBanks();
-    require_once "Views/bank.php";
+    require_once __DIR__ . "/../view/bank.php";
 }
 else {
-    require_once "Views/dashboard.php";
+    require_once __DIR__ . "/../view/dashboard/dashboard.php";
 }
 
 

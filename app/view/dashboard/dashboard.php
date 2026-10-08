@@ -12,13 +12,17 @@
             <h3>⚙️ Admin</h3>
         </div>
         <ul class="sidebar-menu">
-    <li><a data-target="home" class="menu-link active">🏠 Trang Chủ</a></li>
-    <li><a href="index.php?page=user" target="content-frame" class="menu-link">👥 Quản lý User</a></li>
-    <li><a href="index.php?page=plan" target="content-frame" class="menu-link">💎 Quản lý Gói</a></li>
-    <li><a href="index.php?page=bank" target="content-frame" class="menu-link">🏦 Quản lý Ngân hàng</a></li>
-    <li><a href="index.php?page=historybank" target="content-frame" class="menu-link">💵 Lịch sử Nạp tiền</a></li>
-    <li><a href="index.php?page=historyplan" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
-</ul>
+            <li><a data-target="home" class="menu-link active">🏠 Trang Chủ</a></li>
+            <li><a href="index.php?page=user" target="content-frame" class="menu-link">👥 Quản lý User</a></li>
+            <li><a href="index.php?page=plan" target="content-frame" class="menu-link">💎 Quản lý Gói</a></li>
+            <li><a href="index.php?page=bank" target="content-frame" class="menu-link">🏦 Quản lý Ngân hàng</a></li>
+            <li><a href="index.php?page=historybank" target="content-frame" class="menu-link">💵 Lịch sử Nạp tiền</a></li>
+            <li><a href="index.php?page=historyplan" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
+            
+            <li style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                <a href="logout.php" class="menu-link" style="color: #ff6b6b; font-weight: bold;">🚪 Đăng xuất</a>
+            </li>
+        </ul>
     </div>
 
     <div class="main-content">
@@ -41,6 +45,8 @@
 
         menuLinks.forEach(link => {
             link.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === 'logout.php') return;
+
                 menuLinks.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
 

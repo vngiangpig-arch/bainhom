@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 require_once 'database/database.php'; 
 
 require_once 'app/models/bankModels.php';

@@ -7,18 +7,34 @@ class BankController {
     }
 
     public function handleRequest() {
-        $action = $_POST['action'] ?? '';
+    $action = $_POST['action'] ?? '';
 
-        if ($_SERVER['REQUEST_METHOD'] === "POST") {
-            if ($action === 'add') $this->bankModel->addBank($_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
-            elseif ($action === 'edit') $this->bankModel->updateBank($_POST['id'], $_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
-            elseif ($action === 'delete') $this->bankModel->deleteBank($_POST['id']);
-            header('Location: index.php?page=bank'); 
-            exit();
+    if ($_SERVER['REQUEST_METHOD'] === "POST") {
+        if ($action === 'add' || $action === 'edit') {
+            $tenbank = trim($_POST['tenbank'] ?? '');
+            $chutaikhoan = trim($_POST['chutaikhoan'] ?? '');
+            $sotaikhoan = trim($_POST['sotaikhoan'] ?? '');
+            if (empty($tenbank) || empty($chutaikhoan) || empty($sotaikhoan)) {
+                $_SESSION['error_message'] = "Bạn phải nhập đầy đủ thông tin!"; 
+                header('Location: index.php?page=bank'); 
+                exit();
+            }
         }
-
-        $banks = $this->bankModel->getBanks();
-        require_once __DIR__ . "/../view/bank/bank.php";
+        if ($action === 'add') {
+            $this->bankModel->addBank($_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
+        }
+        elseif ($action === 'edit') {
+            $this->bankModel->updateBank($_POST['id'], $_POST['tenbank'], $_POST['chutaikhoan'], $_POST['sotaikhoan']);
+        }
+        elseif ($action === 'delete') {
+            $this->bankModel->deleteBank($_POST['id']);
+        }
+        header('Location: index.php?page=bank'); 
+        exit();
     }
+
+    $banks = $this->bankModel->getBanks();
+    require_once __DIR__ . "/../view/bank/bank.php";
+}
 }
 ?>

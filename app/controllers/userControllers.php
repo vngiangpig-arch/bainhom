@@ -12,6 +12,16 @@ class UserController {
         $action = $_POST['action'] ?? '';
 
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            if($action === "add" || $action === "edit"){
+                $username = trim($_POST['username'] ?? "");
+                $email = trim($_POST['email'] ?? "");
+                $password = trim($_POST['password'] ?? "");
+                if(empty($username) || empty($email) || empty($password)){
+                    $_SESSION['error_message'] = "Bạn phải nhập đầy đủ thông tin!";
+                    header('Location: index.php?page=user');
+                    exit();
+                }
+            }
             $id = $_POST['id'] ?? '';
             $plan_id = !empty($_POST['plan_id']) ? $_POST['plan_id'] : null;
 

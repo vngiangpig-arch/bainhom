@@ -10,7 +10,7 @@ class PlanController {
      $action = $_POST['action'] ?? '';
 
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-        if ($action === 'add') {
+        if ($action === 'add'|| $action === 'edit' ) {
             $name = trim($_POST['name'] ?? '');
             $price = trim($_POST['price'] ?? '');
             $device = trim($_POST['device'] ?? '');

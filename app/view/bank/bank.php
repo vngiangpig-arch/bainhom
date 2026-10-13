@@ -3,8 +3,15 @@
 <head><meta charset="UTF-8"><title>Quản lý Ngân hàng</title><link rel="stylesheet" href="style.css"></head>
 <body>
     <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>Danh sách Ngân hàng</h2>
+    <?php if (isset($_SESSION['error_message'])): ?>
+        <div style="color: white; background-color: red; padding: 10px; margin-bottom: 15px;">
+            <?= $_SESSION['error_message']; ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>Danh sách Ngân hàng</h2>
             <button class="btn btn-save" onclick="openAddModal()">+ Thêm Ngân Hàng</button>
         </div>
         <table>
@@ -33,9 +40,9 @@
             <div class="modal-header"><h3>Thêm Ngân Hàng</h3><span class="close" onclick="closeModal('modalAdd')">&times;</span></div>
             <form method="POST" action="index.php?page=bank">
                 <input type="hidden" name="action" value="add">
-                <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" required></div>
-                <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" required></div>
-                <div class="form-group"><label>Số Tài Khoản</label><input type="text" name="sotaikhoan" required></div>
+                <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank"></div>
+                <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan"></div>
+                <div class="form-group"><label>Số Tài Khoản</label><input type="text" name="sotaikhoan"></div>
                 <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalAdd')">Hủy</button><button type="submit" class="btn btn-save">Thêm mới</button></div>
             </form>
         </div>
@@ -46,9 +53,9 @@
             <div class="modal-header"><h3>Sửa Ngân Hàng</h3><span class="close" onclick="closeModal('modalEdit')">&times;</span></div>
             <form method="POST" action="index.php?page=bank">
                 <input type="hidden" name="action" value="edit"><input type="hidden" name="id" id="edit_id">
-                <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" id="edit_tenbank" required></div>
-                <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" id="edit_chutaikhoan" required></div>
-                <div class="form-group"><label>Số Tài Khoản</label><input type="text" name="sotaikhoan" id="edit_sotaikhoan" required></div>
+                <div class="form-group"><label>Tên Ngân Hàng</label><input type="text" name="tenbank" id="edit_tenbank"></div>
+                <div class="form-group"><label>Chủ Tài Khoản</label><input type="text" name="chutaikhoan" id="edit_chutaikhoan"></div>
+                <div class="form-group"><label>Số Tài Khoản</label><input type="text" name="sotaikhoan" id="edit_sotaikhoan"></div>
                 <div class="modal-footer"><button type="button" class="btn btn-cancel" onclick="closeModal('modalEdit')">Hủy</button><button type="submit" class="btn btn-save">Lưu thay đổi</button></div>
             </form>
         </div>

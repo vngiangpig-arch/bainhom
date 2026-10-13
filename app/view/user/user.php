@@ -11,6 +11,12 @@
 </head>
 <body>
     <div class="container">
+        <?php if (isset($_SESSION['error_message'])): ?>
+        <div style="color: white; background-color: red; padding: 10px; margin-bottom: 15px;">
+            <?= $_SESSION['error_message']; ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2>Danh sách Thành viên</h2><button class="btn btn-save" onclick="openAddModal()">+ Thêm User</button>
         </div>
@@ -46,10 +52,10 @@
             <div class="modal-header"><h3>Thêm User</h3><span class="close" onclick="closeModal('modalAdd')">&times;</span></div>
             <form method="POST" action="index.php?page=user">
                 <input type="hidden" name="action" value="add">
-                <div class="form-group"><label>Tên hiển thị</label><input type="text" name="username" required></div>
-                <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
-                <div class="form-group"><label>Mật khẩu</label><input type="password" name="password" required></div>
-                <div class="form-group"><label>Số dư (đ)</label><input type="number" name="price" value="0" required></div>
+                <div class="form-group"><label>Tên hiển thị</label><input type="text" name="username"></div>
+                <div class="form-group"><label>Email</label><input type="email" name="email"></div>
+                <div class="form-group"><label>Mật khẩu</label><input type="password" name="password"></div>
+                <div class="form-group"><label>Số dư (đ)</label><input type="number" name="price" value="0"></div>
                 <div style="display:flex; gap:10px;">
                     <div class="form-group" style="flex:1"><label>Gói VIP</label>
                         <select name="plan_id"><option value="">Không</option><?php foreach($plans as $p): ?><option value="<?= $p['id'] ?>"><?= $p['name'] ?></option><?php endforeach; ?></select>

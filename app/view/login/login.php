@@ -1,37 +1,3 @@
-<?php
-session_start();
-require_once 'database/database.php';
-
-if (isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
-
-$error = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $stmt = $pdo->prepare("SELECT * FROM user WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user && password_verify($password, $user['password'])) {
-        if ($user['status'] === 'Banned') {
-            $error = "Tài khoản của bạn đã bị khóa!";
-        } else {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            
-            header("Location: index.php");
-            exit();
-        }
-    } else {
-        $error = "Email hoặc mật khẩu không đúng!";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -51,11 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-box">
         <h2 style="text-align: center; margin-bottom: 20px;">Đăng Nhập Admin</h2>
         
-        <?php if ($error): ?>
-            <p style="color: red; text-align: center;"><?= $error ?></p>
+        <?php if (!empty($error)): ?>
+            <div style="background-color: #ffe6e6; color: red; padding: 10px; border-radius: 4px; text-align: center; margin-bottom: 15px; border: 1px solid red;">
+                <?= htmlspecialchars($error) ?>
+            </div>
         <?php endif; ?>
-
-        <form method="POST" action="">
+        <form method="POST" action="index.php?page=login">
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" required>

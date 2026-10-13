@@ -6,6 +6,12 @@ class UserModel {
         $this->pdo = $pdoConnection;
     }
 
+    public function getUserByEmail($email) {
+    $stmt = $this->pdo->prepare("SELECT * FROM user WHERE email = ?");
+    $stmt->execute([$email]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
     public function getUsers() {
         $sql = "SELECT u.*, p.name as plan_name FROM user u LEFT JOIN plan p ON u.plan_id = p.id ORDER BY u.id DESC";
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);

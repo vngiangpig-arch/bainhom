@@ -1,7 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+$page = $_GET['page'] ?? 'dashboard';
+if (!isset($_SESSION['user_id']) && $page !== 'login') {
+    header("Location: index.php?page=login");
     exit();
 }
 require_once 'database/database.php'; 
@@ -11,14 +12,21 @@ require_once 'app/models/planModels.php';
 require_once 'app/models/historyModels.php';
 require_once 'app/models/userModels.php';
 
+require_once 'app/controllers/loginControllers.php';
 require_once 'app/controllers/bankControllers.php';
 require_once 'app/controllers/planControllers.php';
 require_once 'app/controllers/historyControllers.php';
 require_once 'app/controllers/userControllers.php';
 
-$page = $_GET['page'] ?? 'dashboard';
-
-if ($page === 'bank') {
+if ($page === 'login') {
+    $controller = new LoginControllers(new UserModel($pdo));
+    $controller->login();
+}
+elseif ($page === 'logout') {
+    $controller = new LoginControllers(new UserModel($pdo));
+    $controller->logout();
+}
+elseif ($page === 'bank') {
     $controller = new BankController(new BankModel($pdo));
     $controller->handleRequest();
 } 

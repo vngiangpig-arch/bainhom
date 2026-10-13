@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head><meta charset="UTF-8"><title>Lịch sử Nạp tiền</title><link rel="stylesheet" href="style.css"></head>
+<head><meta charset="UTF-8"><title>Lịch sử Nạp tiền</title><link rel="stylesheet" href="assets/css/style.css"></head>
 <body>
     <div class="container">
         <h2>Lịch Sử Nạp Tiền</h2>

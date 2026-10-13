@@ -20,7 +20,7 @@
             <li><a href="index.php?page=historyplan" target="content-frame" class="menu-link">📜 Lịch sử Thuê Gói</a></li>
             
             <li style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                <a href="logout.php" class="menu-link" style="color: #ff6b6b; font-weight: bold;">🚪 Đăng xuất</a>
+                <a href="index.php?page=logout" class="menu-link" style="color: #ff6b6b; font-weight: bold;">🚪 Đăng xuất</a>
             </li>
         </ul>
     </div>

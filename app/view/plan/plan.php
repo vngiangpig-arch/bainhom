@@ -3,6 +3,38 @@
 <head><meta charset="UTF-8"><title>Quản lý Gói VIP</title><link rel="stylesheet" href="style.css"></head>
 <body>
     <div class="container">
+        <?php 
+
+if (!empty($_SESSION['error_message'])) {
+    echo '<div id="notification-alert" style="background-color: #ff4d4d; color: white; padding: 12px; margin-bottom: 15px; border-radius: 4px; font-weight: bold;">' 
+         . htmlspecialchars($_SESSION['error_message']) 
+         . '</div>';
+    unset($_SESSION['error_message']);
+}
+
+
+if (!empty($_SESSION['success_message'])) {
+    echo '<div id="notification-alert" style="background-color: #28a745; color: white; padding: 12px; margin-bottom: 15px; border-radius: 4px; font-weight: bold;">' 
+         . htmlspecialchars($_SESSION['success_message']) 
+         . '</div>';
+    unset($_SESSION['success_message']);
+}
+?>
+
+<script>
+    setTimeout(function() {
+        let alertBox = document.getElementById('notification-alert');
+        if (alertBox) {
+            alertBox.style.transition = 'opacity 0.5s ease';
+            alertBox.style.opacity = '0';
+
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+            }, 500);
+        }
+    }, 1500);
+</script>
+    
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h2>Danh sách Gói</h2><button class="btn btn-save" onclick="openAddModal()">+ Thêm Gói</button>
         </div>
